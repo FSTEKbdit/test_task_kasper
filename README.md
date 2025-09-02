@@ -12,12 +12,13 @@ test task for Kasper
 1. С официального сайта VirtualBox (https://www.virtualbox.org/) скачать VBox и настроить (там графический интерфейс, должно быть все понятно)
 2. С официального сайта дистрибутива AlmaLinux (https://almalinux.org/get-almalinux/) скачать образ AlmaLinux-9
 3. В VBox нажимаем **"Создать"** и в поле **"Образ ISO"** выбираем образ, который только что скачали. Далее настраиваем ВМ через графический интерфейс. Даем имя **"Target"**
-4. После этого выключаем ВМ. В VBox выбираем нашу ВМ -> **"Настроить"** -> **"Сеть"** и у 1-го адаптера **"Тип подключения"** ставим **"Сетевой мост"**. Жмем **ОК**.
+4. После этого выключаем ВМ. В VBox выбираем нашу ВМ -> **"Настроить"** -> **"Сеть"** и у 1-го адаптера **"Тип подключения"** ставим **"Сетевой мост"**, включаем второй адаптер и тип подключения **Виртуальный адаптер хоста** (нужно будет для второго бонусного задания). Жмем **ОК**.
 5. **ПКМ** по нашей ВМ -> **"Клонировать"**. В секции **"Политика MAC-адреса"** выбираем **"Сгенерировать новые MAC-адреса"**. Называем **"Controller"** и все принимаем.
 6. Запускаем обе ВМ. В Target в терминале пишем ***'ip a'*** и копируем **IPv4-адрес**, который указан в интрефейсе enp0s3
-7. На Controller устанавливаем **Ansible**. Для этого сначала выпоняем ***'sudo yum update'***, затем ***'sudo yum install -y epel-release'***. После выполняем команды из документации: https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-fedora-linux (именно из секции для **Fedora**)
-8. Скачиваем на Controller роли и плейбуки ansible. В терминале выполняем ***'sudo curl -L --compressed https://github.com/FSTEKbdit/test_task_kasper/archive/refs/heads/main.tar.gz | sudo tar -xzf -'***. И переходим в директорию **"ansible"** - ***'cd ansible'***.
-9. На **Controller** редактируем файл **inventory** - ***'vi inventory.ini'***. Необходимо в **ansible_host** заменить установленный там IP-адрес на адрес **Target**. Также в **ansible_password** установить пароль для ***root'а*** на хосте **Target**.
+7. Также выпоняем ***'sudo ip address add 192.168.56.111/24 dev enp0s8'*** чтобы во время выпонения второго бонусного задания у нас сразу было подключение к воркер хосту
+8. На Controller устанавливаем **Ansible**. Для этого сначала выпоняем ***'sudo yum update'***, затем ***'sudo yum install -y epel-release'***. После выполняем команды из документации: https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-fedora-linux (именно из секции для **Fedora**)
+9. Скачиваем на Controller роли и плейбуки ansible. В терминале выполняем ***'sudo curl -L --compressed https://github.com/FSTEKbdit/test_task_kasper/archive/refs/heads/main.tar.gz | sudo tar -xzf -'***. И переходим в директорию **"ansible"** - ***'cd ansible'***.
+10. На **Controller** редактируем файл **inventory** - ***'vi inventory.ini'***. Необходимо в **ansible_host** заменить установленный там IP-адрес на адрес **Target**. Также в **ansible_password** установить пароль для ***root'а*** на хосте **Target**.
 
 <br>
 
