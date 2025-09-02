@@ -1,0 +1,11 @@
+[Unit]
+Description=Prometheus Web Service
+
+[Service]
+WorkingDirectory=/opt/prometheus-task-main
+ExecStart=python3 /opt/prometheus-task-main/prometheus_test.py
+User=root
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

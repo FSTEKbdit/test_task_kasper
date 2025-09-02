@@ -1,0 +1,10 @@
+---
+# defaults file for run-dockerfile-role
+
+
+github_project_url: "https://github.com/FSTEKbdit/prometheus-task/archive/refs/heads/main.tar.gz"
+image_name: "prometheus:latest"
+dockerfile_dir_name: "/opt/prometheus-task-main"
+dockerfile_name: "Dockerfile"
+container_name: "prometheus_container"
+web_ports: "8080:8080"

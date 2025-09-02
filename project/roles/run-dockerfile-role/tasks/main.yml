@@ -1,0 +1,22 @@
+---
+# tasks file for run-dockerfile-role
+
+
+- name: Pull tar repo from github
+  ansible.builtin.unarchive:
+    src: "{ github_project_url }"
+    dest: /opt
+    remote_src: yes
+
+- name: Build Python Prometheus image
+  community.docker.docker_image_build:
+    name: "{ image_name }"
+    path: "{ dockerfile_dir_name }"
+    dockerfile: "{ dockerfile_name }"
+
+- name: Create a data container
+  community.docker.docker_container:
+    name: "{ container_name }"
+    image: "{ image_name }"
+    ports:
+      - "{ web_ports }"

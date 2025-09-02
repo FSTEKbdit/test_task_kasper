@@ -1,0 +1,16 @@
+---
+-
+  name: Add SSH key for remote host to known_hosts
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - add-known-host-role
+
+
+- name: Install docker and run container
+  hosts: target1
+  gather_facts: false
+  become: true
+  roles:
+    - docker-install-role
+    - run-dockerfile-role

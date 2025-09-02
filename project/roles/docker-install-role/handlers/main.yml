@@ -1,0 +1,8 @@
+---
+# handlers file for docker-install-role
+
+- name: Start and enable docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes

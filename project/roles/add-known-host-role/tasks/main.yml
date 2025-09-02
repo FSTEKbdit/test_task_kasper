@@ -1,0 +1,15 @@
+---
+# tasks file for add-known-host-role
+
+
+- name: Gather SSH key from remote host using ssh-keyscan
+  command: "ssh-keyscan -t rsa {{ hostvars['target1'].ansible_host }}"
+  register: ssh_key_result
+  changed_when: false
+
+- name: Add remote host SSH key to known_hosts file
+  ansible.builtin.known_hosts:
+    path: /home/dony/.ssh/known_hosts
+    name: "{{ hostvars['target1'].ansible_host }}"
+    key: "{{ ssh_key_result.stdout }}"
+    state: present

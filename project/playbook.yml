@@ -1,0 +1,12 @@
+- 
+  name: Add SSH key for remote host to known_hosts
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - add-known-host-role
+
+-
+  name: Install and start Prometheus service
+  hosts: target1
+  roles:
+    - prometheus-role

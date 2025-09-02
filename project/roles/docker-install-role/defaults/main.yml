@@ -1,0 +1,5 @@
+---
+# defaults file for docker-install-role
+
+
+docker_repo_url: "https://download.docker.com/linux/centos/docker-ce.repo"

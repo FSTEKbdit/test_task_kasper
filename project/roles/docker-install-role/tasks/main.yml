@@ -1,0 +1,45 @@
+---
+# tasks file for docker-install-role
+
+
+- name: Upgrade all packages on servers
+  dnf:
+    name: "*"
+    state: latest
+
+- name: Uninstall old versions
+  dnf:
+    name:
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-engine
+    state: absent
+
+- name: Set up docker repository
+  shell: |
+    dnf install -y yum-utils
+    yum-config-manager --add-repo "{ docker_repo_url }"
+
+- name: Install the latest version of Docker Engine and containerd
+  dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - python3-requests
+
+- name: Start and enable docker.service
+  service:
+    name: docker.service
+    state: started
+    enabled: yes
+
+- name: Start and enable docker.socket
+  service:
+    name: docker.socket
+    state: started
+    enabled: yes

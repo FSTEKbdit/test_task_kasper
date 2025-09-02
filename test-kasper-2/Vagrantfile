@@ -1,0 +1,25 @@
+
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "almalinux/9-local"
+  config.vm.box_check_update = false
+
+  config.ssh.username = "vagrant"
+  config.ssh.password = "vagrant"
+  config.ssh.insert_key = false
+
+  config.vm.network "private_network",
+    ip: "192.168.56.10",
+    virtualbox__adapter: 2
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 2048
+    vb.cpus = 2
+
+    vb.customize ["modifyvm", :id,
+      "--nic2", "hostonly",
+      "--hostonlyadapter2", "VirtualBox Host-Only Ethernet Adapter",
+      "--nictype2", "82540EM", "--cableconnected2", "on"
+    ]
+  end
+end
